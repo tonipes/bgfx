@@ -17,6 +17,7 @@ bx_dep = dependency('bx', fallback: ['bx', 'bx_dep'])
 bimg_dep = dependency('bimg', fallback: ['bimg', 'bimg_dep'])
 dependencies = [bx_dep, bimg_dep]
 
+
 objcpp_args = []
 if host_machine.system() == 'darwin'
 	add_languages('objcpp')
@@ -26,12 +27,17 @@ if host_machine.system() == 'darwin'
 	objcpp_args = ['-std=c++14']
 endif
 
+if host_machine.system() == 'linux'
+  dependencies += dependency('GL')
+  dependencies += dependency('X11')
+endif
+
 bgfx_lib = static_library(
   'libbgfx',
   src,
   include_directories : includes,
   dependencies        : dependencies,
-	objcpp_args         : objcpp_args	
+  objcpp_args         : objcpp_args	
 )
 
 bgfx_dep = declare_dependency(include_directories : includes, link_with: bgfx_lib, dependencies: dependencies)
