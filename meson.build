@@ -17,7 +17,6 @@ bx_dep = dependency('bx', fallback: ['bx', 'bx_dep'])
 bimg_dep = dependency('bimg', fallback: ['bimg', 'bimg_dep'])
 dependencies = [bx_dep, bimg_dep]
 
-
 objcpp_args = []
 if host_machine.system() == 'darwin'
 	add_languages('objcpp')
@@ -37,7 +36,7 @@ bgfx_lib = static_library(
   src,
   include_directories : includes,
   dependencies        : dependencies,
-  objcpp_args         : objcpp_args	
+  objcpp_args         : objcpp_args
 )
 
 bgfx_dep = declare_dependency(include_directories : includes, link_with: bgfx_lib, dependencies: dependencies)
@@ -45,6 +44,6 @@ bgfx_dep = declare_dependency(include_directories : includes, link_with: bgfx_li
 subdir('3rdparty')
 
 #if building for native, also build tools
-if not meson.is_cross_build()  
+if not meson.is_cross_build()
 	subdir('tools')
 endif
