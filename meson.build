@@ -19,7 +19,7 @@ dependencies = [bx_dep, bimg_dep]
 
 objcpp_args = []
 if host_machine.system() == 'darwin'
-	add_languages('objcpp')
+	add_languages('objcpp', required: true, native: false)
 	src = ['src/amalgamated.mm']
 	appleframeworks_dep = dependency('appleframeworks', modules : ['Metal', 'QuartzCore', 'Cocoa'])
 	dependencies += appleframeworks_dep
